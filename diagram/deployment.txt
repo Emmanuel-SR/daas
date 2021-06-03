@@ -29,6 +29,7 @@ node "Servidor DaaS" <<device>> as daas {
      file CARTERA_CASTIGO_ASIGNACION_YYYYMM.xlsx
      file CARTERA_CASTIGO_PAGOS_YYYYMMDD.xlsx
      file CARTERA_CASTIGO_GESTORES_YYYYMM.xlsx
+     file CARTERA_CASTIGO_CREDITOS_YYYYMM.xlsx
     }
   }
 }

@@ -1,0 +1,82 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>CIP_DM</Database>
+    <Server>localhost</Server>
+    <ConnectionString>DataSource=localhost;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>l4rosIC9kJ4ft3aLm4MYPnzBIR4=6/3/2021 12:48:35 AM6/3/2021 12:48:35 AM</TimeStamp>
+        <ID>
+          <String>CIP DM</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>+4L7JhKE7N1AIiT8O0MMsNnFedI=6/3/2021 12:49:39 AM6/3/2021 12:49:25 AM</TimeStamp>
+        <ID>
+          <String>CIP DM</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>n2dlGEQU9uDs926WeRzMciqEK4c=6/3/2021 12:49:52 AM6/3/2021 12:49:51 AM</TimeStamp>
+        <ID>
+          <String>DIM CREDIT</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>FRjKtDaTt23EyHr0HMneMMbRlW4=6/3/2021 12:50:11 AM6/3/2021 12:50:11 AM</TimeStamp>
+        <ID>
+          <String>DIM NEGOTIATOR</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>E9LX9sB0ReBj2Gzv+7KMvwRND68=6/3/2021 1:25:02 AM6/3/2021 12:51:15 AM</TimeStamp>
+        <ID>
+          <String>DIM DATE</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>u+qSqmLlNMoqnko1r5SEZTsmsVk=6/3/2021 1:21:34 AM6/3/2021 12:53:48 AMI8VRyZS+7kW4aE4Qgdddw+3HDZc=6/3/2021 12:53:48 AM6/3/2021 12:53:48 AM</TimeStamp>
+        <ID>
+          <String>CIP DM</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>SQ4BFfdtEdbfiiTiq4Q8JOi8j3E=6/3/2021 1:28:19 AM6/3/2021 1:28:19 AMkHXSRI6Ogiu3IvbeTGo1l+0dheg=6/3/2021 1:28:19 AM6/3/2021 1:28:19 AM</TimeStamp>
+        <ID>
+          <String>CIP DM 1</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>YsDpkG3d1NG2Kqs1OUMJcc6QKBA=6/3/2021 12:48:16 AM6/3/2021 12:48:16 AM</TimeStamp>
+      <ID>
+        <String>CIP_DM</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2021-06-03T06:28:32.253333Z</LastDeployed>
+</DeploymentSnapshot>
