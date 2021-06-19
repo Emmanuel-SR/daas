@@ -35,19 +35,6 @@
           </MeasureGroup>
         </MeasureGroups>
       </Cube>
-      <Cube>
-        <ID>CIP DM 1</ID>
-        <MeasureGroups>
-          <MeasureGroup>
-            <ID>VW DEBT COLLECTION</ID>
-            <Partitions>
-              <Partition>
-                <ID>VW DEBT COLLECTION</ID>
-              </Partition>
-            </Partitions>
-          </MeasureGroup>
-        </MeasureGroups>
-      </Cube>
     </Cubes>
     <DataSourceImpersonationInfo>
       <ImpersonationMode xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">Default</ImpersonationMode>

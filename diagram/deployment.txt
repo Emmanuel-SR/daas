@@ -1,27 +1,29 @@
 @startuml
 
 cloud "Compartamos Financiera" <<extranet>> as c1
-node "PC Gerencia" <<device>> as pc1
+node "PC Gerencia" <<device>> as pc1 {
+  node "Power BI Desktop" <<executionEnviromentas>> as pbi {
+    artifact cip_dashboard.pbix
+  }
+}
+
 node "PC TI" <<device>> as pc2
-node "PC Gestor" <<device>> as pc3
+node "PC Ejecutivo" <<device>> as pc3
 node "Red Local" <<network>> as lan
 
-node "Servidor Principal" <<device>> as sv1 {
+node "Windows Server 2008" <<executionEnviroment>> as sv1 {
   node "Servidor Web" <<executionEnviroment>> as ws1 {
    artifact cobinpe.exe 
   }
   node "MSSQL Server" <<executionEnviroment>> {
-   component CIP_DM <<database>> as db1
-   component Seguro09_02 <<database>> as db2
+   component "Base de datos multidimensional" <<database>> as db1
+   component "Base de datos relacional" <<database>> as db2
  }
-}
-
-node "Servidor DaaS" <<device>> as daas {
   node "Pentaho DI" <<executionEnviroment>> as pdi {
-   artifact job_insert_dim_credito.kjb
-   artifact job_insert_dim_gestor.kjb
-   artifact job_load_fact_pagos.kjb
-   artifact job_load_hist_asignacion.kjb
+   artifact job_insert_dim_credito.zip
+   artifact job_insert_dim_gestor.zip
+   artifact job_load_fact_pagos.zip
+   artifact job_load_hist_asignacion.zip
   }
   node "Servidor de Archivos" <<executionEnviroment>> as fs1 {
     folder data {
@@ -36,10 +38,12 @@ node "Servidor DaaS" <<device>> as daas {
 
 c1 -- pc1 : smtp
 
-pc1 -- lan
-pc2 -- lan 
-pc3 -- lan
-lan -- daas
-lan -- sv1
+pc1 -- lan : tpc/ip
+pc2 -- lan : tpc/ip
+pc3 -- lan : tpc/ip
+lan -- sv1 : tpc/ip
+db1 <-- pdi : jdbc
+fs1 <-- pdi
+ws1 --> db2 : odbc
 
 @enduml

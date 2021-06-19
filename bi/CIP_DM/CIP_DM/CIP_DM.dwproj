@@ -17,16 +17,6 @@
         </ProjectItem>
       </Dependencies>
     </ProjectItem>
-    <ProjectItem>
-      <Name>CIP DM 1.cube</Name>
-      <FullPath>CIP DM 1.cube</FullPath>
-      <Dependencies>
-        <ProjectItem>
-          <Name>CIP DM 1.partitions</Name>
-          <FullPath>CIP DM 1.partitions</FullPath>
-        </ProjectItem>
-      </Dependencies>
-    </ProjectItem>
   </Cubes>
   <Dimensions>
     <ProjectItem>
