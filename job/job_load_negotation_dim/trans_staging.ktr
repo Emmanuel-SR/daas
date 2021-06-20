@@ -498,106 +498,88 @@
   </connection>
   <order>
     <hop>
-      <from>Allowed File Format</from>
-      <to>Validate File Format</to>
+      <from>DIM_ACTION.TXT</from>
+      <to>Action Fields</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get File Name</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
-      <to>Allowed File Format</to>
+      <from>DIM_ACTION</from>
+      <to>DIM_ACTION.TXT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Switch / Case</from>
-      <to>TXT</to>
+      <to>DIM_ACTION</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Validate File Format</from>
-      <to>Invalid File</to>
+      <from>Data Grid</from>
+      <to>Get Variables</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Validate File Format</from>
+      <from>Concat Fields</from>
+      <to>Write to log</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get Variables</from>
+      <to>Concat Fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Write to log</from>
       <to>Switch / Case</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>TXT</from>
-      <to>CSV file input</to>
+      <from>Switch / Case</from>
+      <to>DIM_CONTACT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input</from>
-      <to>Select Fields</to>
+      <from>Switch / Case</from>
+      <to>DIM_RESPONSE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Replace in string</from>
-      <to>Load Data</to>
+      <from>Action Fields</from>
+      <to>Load DIM_ACTION</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select Fields</from>
-      <to>Data Validator</to>
+      <from>DIM_RESPONSE.TXT</from>
+      <to>Response Fields</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Data Validator</from>
-      <to>Replace in string</to>
+      <from>Response Fields</from>
+      <to>Load DIM_RESPONSE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Data Validator</from>
-      <to>Invalid Data</to>
+      <from>DIM_CONTACT.TXT</from>
+      <to>Contact Fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_RESPONSE</from>
+      <to>DIM_RESPONSE.TXT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Contact Fields</from>
+      <to>Load DIM_CONTACT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_CONTACT</from>
+      <to>DIM_CONTACT.TXT</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Allowed File Format</name>
-    <type>Constant</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>ALLOWED_FILE_FORMAT</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <nullif>txt</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>304</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>CSV file input</name>
+    <name>DIM_ACTION.TXT</name>
     <type>CsvInput</type>
     <description />
     <distribute>Y</distribute>
@@ -608,7 +590,7 @@
       <schema_name />
     </partitioning>
     <filename />
-    <filename_field>filename</filename_field>
+    <filename_field>path</filename_field>
     <rownum_field />
     <include_filename>N</include_filename>
     <separator>|</separator>
@@ -622,7 +604,7 @@
     <encoding>UTF-8</encoding>
     <fields>
       <field>
-        <name>CREDIT_CODE</name>
+        <name>ACTION_NAME</name>
         <type>String</type>
         <format />
         <currency />
@@ -633,31 +615,9 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>AMOUNT</name>
+        <name>FLAG</name>
         <type>String</type>
         <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>CURRENCY</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>PAYMENT_DATE</name>
-        <type>Date</type>
-        <format>yyyy-MM-dd</format>
         <currency />
         <decimal />
         <group />
@@ -675,493 +635,12 @@
     </remotesteps>
     <GUI>
       <xloc>656</xloc>
-      <yloc>240</yloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Data Validator</name>
-    <type>Validator</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <validate_all>N</validate_all>
-    <concat_errors>N</concat_errors>
-    <concat_separator>|</concat_separator>
-    <validator_field>
-      <name>CURRENCY</name>
-      <validation_name>dv_currency</validation_name>
-      <max_length />
-      <min_length />
-      <null_allowed>N</null_allowed>
-      <only_null_allowed>N</only_null_allowed>
-      <only_numeric_allowed>N</only_numeric_allowed>
-      <data_type>String</data_type>
-      <data_type_verified>Y</data_type_verified>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <max_value />
-      <min_value />
-      <start_string />
-      <end_string />
-      <start_string_not_allowed />
-      <end_string_not_allowed />
-      <regular_expression />
-      <regular_expression_not_allowed />
-      <error_code>3</error_code>
-      <error_description>NOT A VALID CURRENCY</error_description>
-      <is_sourcing_values>N</is_sourcing_values>
-      <sourcing_step />
-      <sourcing_field />
-      <allowed_value>
-        <value>SOLES</value>
-        <value>DOLARES</value>
-        <value>USD</value>
-        <value>PEN</value>
-      </allowed_value>
-    </validator_field>
-    <validator_field>
-      <name>CREDIT_CODE</name>
-      <validation_name>dv_credit_code</validation_name>
-      <max_length />
-      <min_length />
-      <null_allowed>N</null_allowed>
-      <only_null_allowed>N</only_null_allowed>
-      <only_numeric_allowed>N</only_numeric_allowed>
-      <data_type>String</data_type>
-      <data_type_verified>Y</data_type_verified>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <max_value />
-      <min_value />
-      <start_string />
-      <end_string />
-      <start_string_not_allowed />
-      <end_string_not_allowed />
-      <regular_expression>^[0-9a-zA-Z]+$</regular_expression>
-      <regular_expression_not_allowed />
-      <error_code>2</error_code>
-      <error_description>NOT A VALID CREDIT CODE</error_description>
-      <is_sourcing_values>N</is_sourcing_values>
-      <sourcing_step />
-      <sourcing_field />
-      <allowed_value />
-    </validator_field>
-    <validator_field>
-      <name>AMOUNT</name>
-      <validation_name>dv_amount</validation_name>
-      <max_length />
-      <min_length />
-      <null_allowed>N</null_allowed>
-      <only_null_allowed>N</only_null_allowed>
-      <only_numeric_allowed>N</only_numeric_allowed>
-      <data_type>Number</data_type>
-      <data_type_verified>N</data_type_verified>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <max_value />
-      <min_value />
-      <start_string />
-      <end_string />
-      <start_string_not_allowed />
-      <end_string_not_allowed />
-      <regular_expression>^\d{1,18}(\.\d{1,2})?$</regular_expression>
-      <regular_expression_not_allowed />
-      <error_code>1</error_code>
-      <error_description>NOT A VALID AMOUNT</error_description>
-      <is_sourcing_values>N</is_sourcing_values>
-      <sourcing_step />
-      <sourcing_field />
-      <allowed_value />
-    </validator_field>
-    <validator_field>
-      <name>PAYMENT_DATE</name>
-      <validation_name>dv_yyyymmdd</validation_name>
-      <max_length />
-      <min_length />
-      <null_allowed>N</null_allowed>
-      <only_null_allowed>N</only_null_allowed>
-      <only_numeric_allowed>N</only_numeric_allowed>
-      <data_type>String</data_type>
-      <data_type_verified>Y</data_type_verified>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <max_value />
-      <min_value />
-      <start_string />
-      <end_string />
-      <start_string_not_allowed />
-      <end_string_not_allowed />
-      <regular_expression>^((19|2[0-9])[0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$</regular_expression>
-      <regular_expression_not_allowed />
-      <error_code>4</error_code>
-      <error_description>NOT A VALID DATE</error_description>
-      <is_sourcing_values>N</is_sourcing_values>
-      <sourcing_step />
-      <sourcing_field />
-      <allowed_value />
-    </validator_field>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>864</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get File Name</name>
-    <type>GetFileNames</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <filter>
-      <filterfiletype>only_files</filterfiletype>
-    </filter>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <rownum>N</rownum>
-    <isaddresult>Y</isaddresult>
-    <filefield>N</filefield>
-    <rownum_field />
-    <filename_Field />
-    <wildcard_Field />
-    <exclude_wildcard_Field />
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <limit>0</limit>
-    <file>
-      <name>${filePath}</name>
-      <filemask />
-      <exclude_filemask />
-      <file_required>Y</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Invalid Data</name>
-    <type>Abort</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <row_threshold>0</row_threshold>
-    <message>INVALID INPUT DATA</message>
-    <always_log_rows>Y</always_log_rows>
-    <abort_with_error>Y</abort_with_error>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>864</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Invalid File</name>
-    <type>Abort</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <row_threshold>0</row_threshold>
-    <message>FILE FORMAT NOT ALLOWED</message>
-    <always_log_rows>Y</always_log_rows>
-    <abort_with_error>Y</abort_with_error>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Load Data</name>
-    <type>TableOutput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CIP_DM</connection>
-    <schema>STAGE</schema>
-    <table>FACT_PAYMENT</table>
-    <commit>10000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field />
-    <fields>
-      <field>
-        <column_name>CREDIT_CODE</column_name>
-        <stream_name>CREDIT_CODE</stream_name>
-      </field>
-      <field>
-        <column_name>AMOUNT</column_name>
-        <stream_name>AMOUNT</stream_name>
-      </field>
-      <field>
-        <column_name>CURRENCY</column_name>
-        <stream_name>CURRENCY</stream_name>
-      </field>
-      <field>
-        <column_name>PAYMENT_DATE</column_name>
-        <stream_name>PAYMENT_DATE</stream_name>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1088</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Replace in string</name>
-    <type>ReplaceString</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>CURRENCY</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>SOLES</replace_string>
-        <replace_by_string>PEN</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>yes</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-      <field>
-        <in_stream_name>CURRENCY</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>DOLARES</replace_string>
-        <replace_by_string>USD</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>yes</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>976</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select Fields</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>CREDIT_CODE</name>
-        <rename />
-      </field>
-      <field>
-        <name>AMOUNT</name>
-        <rename />
-      </field>
-      <field>
-        <name>CURRENCY</name>
-        <rename />
-      </field>
-      <field>
-        <name>PAYMENT_DATE</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>PAYMENT_DATE</name>
-        <rename>PAYMENT_DATE</rename>
-        <type>String</type>
-        <length>8</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyyMMdd</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>768</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>extension</name>
-      </field>
-      <field>
-        <name>filename</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>176</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Switch / Case</name>
-    <type>SwitchCase</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fieldname>extension</fieldname>
-    <use_contains>N</use_contains>
-    <case_value_type>String</case_value_type>
-    <case_value_format />
-    <case_value_decimal />
-    <case_value_group />
-    <default_target_step>Invalid File</default_target_step>
-    <cases>
-      <case>
-        <value>txt</value>
-        <target_step>TXT</target_step>
-      </case>
-    </cases>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>TXT</name>
+    <name>DIM_ACTION</name>
     <type>Dummy</type>
     <description />
     <distribute>Y</distribute>
@@ -1179,14 +658,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>240</yloc>
+      <xloc>544</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Validate File Format</name>
-    <type>FilterRows</type>
+    <name>Switch / Case</name>
+    <type>SwitchCase</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1195,16 +674,319 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <send_true_to>Switch / Case</send_true_to>
-    <send_false_to>Invalid File</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>extension</leftvalue>
-        <function>IN LIST</function>
-        <rightvalue>ALLOWED_FILE_FORMAT</rightvalue>
-      </condition>
-    </compare>
+    <fieldname>filename</fieldname>
+    <use_contains>N</use_contains>
+    <case_value_type>String</case_value_type>
+    <case_value_format />
+    <case_value_decimal />
+    <case_value_group />
+    <default_target_step>Invalid File</default_target_step>
+    <cases>
+      <case>
+        <value>DIM_ACTION.txt</value>
+        <target_step>DIM_ACTION</target_step>
+      </case>
+      <case>
+        <value>DIM_RESPONSE.txt</value>
+        <target_step>DIM_RESPONSE</target_step>
+      </case>
+      <case>
+        <value>DIM_CONTACT.txt</value>
+        <target_step>DIM_CONTACT</target_step>
+      </case>
+    </cases>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Action Fields</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>ACTION_NAME</name>
+        <rename />
+      </field>
+      <field>
+        <name>FLAG</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Load DIM_ACTION</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CIP_DM</connection>
+    <schema>STAGE</schema>
+    <table>DIM_ACTION</table>
+    <commit>10000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>ACTION_NAME</column_name>
+        <stream_name>ACTION_NAME</stream_name>
+      </field>
+      <field>
+        <column_name>FLAG</column_name>
+        <stream_name>FLAG</stream_name>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Data Grid</name>
+    <type>DataGrid</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item>DIM_ACTION.txt</item>
+      </line>
+      <line>
+        <item>DIM_RESPONSE.txt</item>
+      </line>
+      <line>
+        <item>DIM_CONTACT.txt</item>
+      </line>
+    </data>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Concat Fields</name>
+    <type>ConcatFields</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <separator>\</separator>
+    <enclosure />
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding />
+    <endedLine />
+    <fileNameInField>N</fileNameInField>
+    <fileNameField />
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format />
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>dirPath</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>path</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>dirPath</name>
+        <variable>${dirPath}</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage />
+    <fields>
+      <field>
+        <name>path</name>
+      </field>
+    </fields>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1214,23 +996,353 @@
     </remotesteps>
     <GUI>
       <xloc>432</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_CONTACT</name>
+    <type>Dummy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_RESPONSE</name>
+    <type>Dummy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_RESPONSE.TXT</name>
+    <type>CsvInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <filename />
+    <filename_field>path</filename_field>
+    <rownum_field />
+    <include_filename>N</include_filename>
+    <separator>|</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding>UTF-8</encoding>
+    <fields>
+      <field>
+        <name>RESPONSE_NAME</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>FLAG</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Response Fields</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>RESPONSE_NAME</name>
+        <rename />
+      </field>
+      <field>
+        <name>FLAG</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Load DIM_RESPONSE</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CIP_DM</connection>
+    <schema>STAGE</schema>
+    <table>DIM_RESPONSE</table>
+    <commit>10000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>RESPONSE_NAME</column_name>
+        <stream_name>RESPONSE_NAME</stream_name>
+      </field>
+      <field>
+        <column_name>FLAG</column_name>
+        <stream_name>FLAG</stream_name>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_CONTACT.TXT</name>
+    <type>CsvInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <filename />
+    <filename_field>path</filename_field>
+    <rownum_field />
+    <include_filename>N</include_filename>
+    <separator>|</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding>UTF-8</encoding>
+    <fields>
+      <field>
+        <name>CONTACT_NAME</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>FLAG</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Contact Fields</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>CONTACT_NAME</name>
+        <rename />
+      </field>
+      <field>
+        <name>FLAG</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Load DIM_CONTACT</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CIP_DM</connection>
+    <schema>STAGE</schema>
+    <table>DIM_CONTACT</table>
+    <commit>10000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>CONTACT_NAME</column_name>
+        <stream_name>CONTACT_NAME</stream_name>
+      </field>
+      <field>
+        <column_name>FLAG</column_name>
+        <stream_name>FLAG</stream_name>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
-    <error>
-      <source_step>Data Validator</source_step>
-      <target_step>Invalid Data</target_step>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename />
-      <descriptions_valuename />
-      <fields_valuename />
-      <codes_valuename />
-      <max_errors />
-      <max_pct_errors />
-      <min_pct_rows />
-    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
