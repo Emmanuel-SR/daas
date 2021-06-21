@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>trans_staging</name>
+    <name>trans_load_dim</name>
     <description />
     <extended_description />
     <trans_version />
@@ -543,18 +543,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Action Fields</from>
-      <to>Load DIM_ACTION</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>DIM_RESPONSE.TXT</from>
       <to>Response Fields</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Response Fields</from>
-      <to>Load DIM_RESPONSE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -568,146 +558,46 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Contact Fields</from>
-      <to>Load DIM_CONTACT</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>DIM_CONTACT</from>
       <to>DIM_CONTACT.TXT</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Switch / Case</from>
+      <to>DIM_CURRENCY</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_CURRENCY.TXT</from>
+      <to>Currency Fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_CURRENCY</from>
+      <to>DIM_CURRENCY.TXT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Currency Fields</from>
+      <to>Load Currency</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Action Fields</from>
+      <to>Load Action</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Response Fields</from>
+      <to>Load Response</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Contact Fields</from>
+      <to>Load Contact</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
-  <step>
-    <name>DIM_ACTION.TXT</name>
-    <type>CsvInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <filename />
-    <filename_field>path</filename_field>
-    <rownum_field />
-    <include_filename>N</include_filename>
-    <separator>|</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding>UTF-8</encoding>
-    <fields>
-      <field>
-        <name>ACTION_NAME</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>FLAG</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>656</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DIM_ACTION</name>
-    <type>Dummy</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Switch / Case</name>
-    <type>SwitchCase</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fieldname>filename</fieldname>
-    <use_contains>N</use_contains>
-    <case_value_type>String</case_value_type>
-    <case_value_format />
-    <case_value_decimal />
-    <case_value_group />
-    <default_target_step>Invalid File</default_target_step>
-    <cases>
-      <case>
-        <value>DIM_ACTION.txt</value>
-        <target_step>DIM_ACTION</target_step>
-      </case>
-      <case>
-        <value>DIM_RESPONSE.txt</value>
-        <target_step>DIM_RESPONSE</target_step>
-      </case>
-      <case>
-        <value>DIM_CONTACT.txt</value>
-        <target_step>DIM_CONTACT</target_step>
-      </case>
-    </cases>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Action Fields</name>
     <type>SelectValues</type>
@@ -722,11 +612,9 @@
     <fields>
       <field>
         <name>ACTION_NAME</name>
-        <rename />
       </field>
       <field>
         <name>FLAG</name>
-        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -738,107 +626,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
+      <xloc>832</xloc>
       <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Load DIM_ACTION</name>
-    <type>TableOutput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CIP_DM</connection>
-    <schema>STAGE</schema>
-    <table>DIM_ACTION</table>
-    <commit>10000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field />
-    <fields>
-      <field>
-        <column_name>ACTION_NAME</column_name>
-        <stream_name>ACTION_NAME</stream_name>
-      </field>
-      <field>
-        <column_name>FLAG</column_name>
-        <stream_name>FLAG</stream_name>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>880</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Data Grid</name>
-    <type>DataGrid</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>filename</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <data>
-      <line>
-        <item>DIM_ACTION.txt</item>
-      </line>
-      <line>
-        <item>DIM_RESPONSE.txt</item>
-      </line>
-      <line>
-        <item>DIM_CONTACT.txt</item>
-      </line>
-    </data>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>112</xloc>
-      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -929,8 +718,8 @@
     </GUI>
   </step>
   <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
+    <name>Contact Fields</name>
+    <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -941,8 +730,121 @@
     </partitioning>
     <fields>
       <field>
-        <name>dirPath</name>
-        <variable>${dirPath}</variable>
+        <name>CONTACT_NAME</name>
+      </field>
+      <field>
+        <name>FLAG</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Currency Fields</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>ISO_4217</name>
+      </field>
+      <field>
+        <name>CURRENCY_NAME</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_ACTION</name>
+    <type>Dummy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_ACTION.TXT</name>
+    <type>CsvInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <filename />
+    <filename_field>path</filename_field>
+    <rownum_field />
+    <include_filename>N</include_filename>
+    <separator>|</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding>UTF-8</encoding>
+    <fields>
+      <field>
+        <name>ACTION_NAME</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>FLAG</name>
         <type>String</type>
         <format />
         <currency />
@@ -961,42 +863,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage />
-    <fields>
-      <field>
-        <name>path</name>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>240</yloc>
+      <xloc>720</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1021,6 +889,152 @@
     <GUI>
       <xloc>544</xloc>
       <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_CONTACT.TXT</name>
+    <type>CsvInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <filename />
+    <filename_field>path</filename_field>
+    <rownum_field />
+    <include_filename>N</include_filename>
+    <separator>|</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding>UTF-8</encoding>
+    <fields>
+      <field>
+        <name>CONTACT_NAME</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>FLAG</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_CURRENCY</name>
+    <type>Dummy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_CURRENCY.TXT</name>
+    <type>CsvInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <filename />
+    <filename_field>path</filename_field>
+    <rownum_field />
+    <include_filename>N</include_filename>
+    <separator>|</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding>UTF-8</encoding>
+    <fields>
+      <field>
+        <name>ISO_4217</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+      </field>
+      <field>
+        <name>CURRENCY_NAME</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1110,6 +1124,331 @@
     </GUI>
   </step>
   <step>
+    <name>Data Grid</name>
+    <type>DataGrid</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item>DIM_ACTION.txt</item>
+      </line>
+      <line>
+        <item>DIM_RESPONSE.txt</item>
+      </line>
+      <line>
+        <item>DIM_CONTACT.txt</item>
+      </line>
+      <line>
+        <item>DIM_CURRENCY.txt</item>
+      </line>
+    </data>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>dirPath</name>
+        <variable>${dirPath}</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Load Action</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CIP_DM</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>Y</quoteString>
+    <sql>INSERT INTO DATA.DIM_ACTION
+  (
+    ACTION_NAME,
+    FLAG
+  )
+SELECT
+  ?,
+  ?
+WHERE NOT EXISTS
+  (
+    SELECT 1
+    FROM DATA.DIM_ACTION A
+    WHERE A.ACTION_NAME = ?
+  )</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+      <argument>
+        <name>ACTION_NAME</name>
+      </argument>
+      <argument>
+        <name>FLAG</name>
+      </argument>
+      <argument>
+        <name>ACTION_NAME</name>
+      </argument>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>928</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Load Contact</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CIP_DM</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>Y</quoteString>
+    <sql>INSERT INTO DATA.DIM_CONTACT
+  (
+    CONTACT_NAME,
+    FLAG
+  )
+SELECT
+  ?,
+  ?
+WHERE NOT EXISTS
+  (
+    SELECT 1
+    FROM DATA.DIM_CONTACT C
+    WHERE C.CONTACT_NAME = ?
+  )</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+      <argument>
+        <name>CONTACT_NAME</name>
+      </argument>
+      <argument>
+        <name>FLAG</name>
+      </argument>
+      <argument>
+        <name>CONTACT_NAME</name>
+      </argument>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Load Currency</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CIP_DM</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>Y</quoteString>
+    <sql>INSERT INTO DATA.DIM_CURRENCY
+  (
+    CURRENCY_KEY,
+    CURRENCY_NAME
+  )
+SELECT
+  ?,
+  ?
+WHERE NOT EXISTS
+  (
+     SELECT 1
+     FROM DATA.DIM_CURRENCY C
+     WHERE C.CURRENCY_NAME = ?
+  )</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+      <argument>
+        <name>ISO_4217</name>
+      </argument>
+      <argument>
+        <name>CURRENCY_NAME</name>
+      </argument>
+      <argument>
+        <name>CURRENCY_NAME</name>
+      </argument>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Load Response</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CIP_DM</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>Y</quoteString>
+    <sql>INSERT INTO DATA.DIM_RESPONSE
+  (
+    RESPONSE_NAME,
+    FLAG
+  )
+SELECT
+  ?,
+  ?
+WHERE NOT EXISTS
+  (
+    SELECT 1
+    FROM DATA.DIM_RESPONSE R
+    WHERE R.RESPONSE_NAME = ?
+  )</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+      <argument>
+        <name>RESPONSE_NAME</name>
+      </argument>
+      <argument>
+        <name>FLAG</name>
+      </argument>
+      <argument>
+        <name>RESPONSE_NAME</name>
+      </argument>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Response Fields</name>
     <type>SelectValues</type>
     <description />
@@ -1123,11 +1462,9 @@
     <fields>
       <field>
         <name>RESPONSE_NAME</name>
-        <rename />
       </field>
       <field>
         <name>FLAG</name>
-        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1145,8 +1482,8 @@
     </GUI>
   </step>
   <step>
-    <name>Load DIM_RESPONSE</name>
-    <type>TableOutput</type>
+    <name>Switch / Case</name>
+    <type>SwitchCase</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1155,33 +1492,31 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>CIP_DM</connection>
-    <schema>STAGE</schema>
-    <table>DIM_RESPONSE</table>
-    <commit>10000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field />
-    <fields>
-      <field>
-        <column_name>RESPONSE_NAME</column_name>
-        <stream_name>RESPONSE_NAME</stream_name>
-      </field>
-      <field>
-        <column_name>FLAG</column_name>
-        <stream_name>FLAG</stream_name>
-      </field>
-    </fields>
+    <fieldname>filename</fieldname>
+    <use_contains>N</use_contains>
+    <case_value_type>String</case_value_type>
+    <case_value_format />
+    <case_value_decimal />
+    <case_value_group />
+    <default_target_step>Invalid File</default_target_step>
+    <cases>
+      <case>
+        <value>DIM_ACTION.txt</value>
+        <target_step>DIM_ACTION</target_step>
+      </case>
+      <case>
+        <value>DIM_RESPONSE.txt</value>
+        <target_step>DIM_RESPONSE</target_step>
+      </case>
+      <case>
+        <value>DIM_CONTACT.txt</value>
+        <target_step>DIM_CONTACT</target_step>
+      </case>
+      <case>
+        <value>DIM_CURRENCY.txt</value>
+        <target_step>DIM_CURRENCY</target_step>
+      </case>
+    </cases>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1190,14 +1525,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>544</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>DIM_CONTACT.TXT</name>
-    <type>CsvInput</type>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1206,41 +1541,14 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <filename />
-    <filename_field>path</filename_field>
-    <rownum_field />
-    <include_filename>N</include_filename>
-    <separator>|</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding>UTF-8</encoding>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage />
     <fields>
       <field>
-        <name>CONTACT_NAME</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>FLAG</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <name>path</name>
       </field>
     </fields>
     <cluster_schema />
@@ -1251,94 +1559,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Contact Fields</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>CONTACT_NAME</name>
-        <rename />
-      </field>
-      <field>
-        <name>FLAG</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>768</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Load DIM_CONTACT</name>
-    <type>TableOutput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CIP_DM</connection>
-    <schema>STAGE</schema>
-    <table>DIM_CONTACT</table>
-    <commit>10000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field />
-    <fields>
-      <field>
-        <column_name>CONTACT_NAME</column_name>
-        <stream_name>CONTACT_NAME</stream_name>
-      </field>
-      <field>
-        <column_name>FLAG</column_name>
-        <stream_name>FLAG</stream_name>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>880</xloc>
-      <yloc>128</yloc>
+      <xloc>432</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

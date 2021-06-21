@@ -18,7 +18,7 @@
     </parameter>
     <parameter>
       <name>filePath</name>
-      <default_value>D:\daas\data\CARTERA_COMPARTAMOS_202011.txt</default_value>
+      <default_value>D:\daas\data\CARTERA_COMPARTAMOS_202007.txt</default_value>
       <description />
     </parameter>
     <parameter>
@@ -28,7 +28,7 @@
     </parameter>
     <parameter>
       <name>loadDate</name>
-      <default_value>20201101</default_value>
+      <default_value>20200701</default_value>
       <description />
     </parameter>
     <parameter>

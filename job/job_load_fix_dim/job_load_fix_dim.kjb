@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>job_load_negotation_dim</name>
+  <name>job_load_fix_dim</name>
   <description />
   <extended_description />
   <job_version />
@@ -43,12 +43,12 @@
     </parameter>
     <parameter>
       <name>subjectFailed</name>
-      <default_value>[BI] CREDITO - Error al cargar los creditos</default_value>
+      <default_value>[BI] DIMENSIONES FIJAS - Error al cargar los dimensiones fijas</default_value>
       <description />
     </parameter>
     <parameter>
       <name>subjectSuccess</name>
-      <default_value>[BI] CREDITO - Exito al cargar los creditos</default_value>
+      <default_value>[BI] DIMENSIONES FIJAS - Exito al cargar los dimensiones fijas</default_value>
       <description />
     </parameter>
   </parameters>
@@ -344,7 +344,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>64</xloc>
+      <xloc>96</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
@@ -354,7 +354,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
+      <xloc>320</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
@@ -367,42 +367,6 @@
       <nr>0</nr>
       <xloc>224</xloc>
       <yloc>64</yloc>
-    </entry>
-    <entry>
-      <name>Load</name>
-      <description />
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/trans_execute_sp.ktr</filename>
-      <transname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name />
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>N</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>288</xloc>
-      <yloc>224</yloc>
     </entry>
     <entry>
       <name>Error Mail</name>
@@ -495,16 +459,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>512</xloc>
+      <xloc>432</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
-      <name>Staging</name>
+      <name>Load</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/trans_staging.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/trans_load_dim.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -536,20 +500,11 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
+      <xloc>224</xloc>
       <yloc>224</yloc>
     </entry>
   </entries>
   <hops>
-    <hop>
-      <from>Load</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>Success</from>
       <to>Succeed Mail</to>
@@ -569,6 +524,15 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
+      <from>START</from>
+      <to>Load</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
       <from>Load</from>
       <to>Error Mail</to>
       <from_nr>0</from_nr>
@@ -578,26 +542,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
-      <to>Staging</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Staging</from>
-      <to>Error Mail</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Staging</from>
-      <to>Load</to>
+      <from>Load</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
