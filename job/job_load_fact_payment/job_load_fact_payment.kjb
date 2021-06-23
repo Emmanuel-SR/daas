@@ -349,8 +349,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
-      <yloc>288</yloc>
+      <xloc>48</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -359,8 +359,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>432</xloc>
-      <yloc>288</yloc>
+      <xloc>384</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>Abort job</name>
@@ -370,8 +370,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>256</xloc>
-      <yloc>112</yloc>
+      <xloc>208</xloc>
+      <yloc>80</yloc>
     </entry>
     <entry>
       <name>Load</name>
@@ -411,8 +411,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>288</yloc>
+      <xloc>272</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>Error Mail</name>
@@ -458,8 +458,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>256</xloc>
-      <yloc>192</yloc>
+      <xloc>208</xloc>
+      <yloc>160</yloc>
     </entry>
     <entry>
       <name>Succeed Mail</name>
@@ -505,8 +505,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
-      <yloc>288</yloc>
+      <xloc>496</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>Staging</name>
@@ -546,8 +546,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>288</yloc>
+      <xloc>144</xloc>
+      <yloc>256</yloc>
     </entry>
   </entries>
   <hops>
@@ -619,7 +619,7 @@
     <notepad>
       <note>Job to load payment data into fact table.</note>
       <xloc>32</xloc>
-      <yloc>48</yloc>
+      <yloc>16</yloc>
       <width>223</width>
       <heigth>26</heigth>
       <fontname />
