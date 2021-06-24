@@ -18,7 +18,7 @@
     </parameter>
     <parameter>
       <name>filePath</name>
-      <default_value>D:\daas\data\CARTERA_COMPARTAMOS_202007.txt</default_value>
+      <default_value />
       <description />
     </parameter>
     <parameter>
@@ -28,7 +28,7 @@
     </parameter>
     <parameter>
       <name>loadDate</name>
-      <default_value>20200701</default_value>
+      <default_value />
       <description />
     </parameter>
     <parameter>
@@ -679,15 +679,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
-      <to>Staging</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>Staging</from>
       <to>Load Dim</to>
       <from_nr>0</from_nr>
@@ -731,6 +722,15 @@
       <enabled>N</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Staging</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>

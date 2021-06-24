@@ -503,11 +503,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get File Name</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Select values</from>
       <to>Allowed File Format</to>
       <enabled>Y</enabled>
@@ -557,6 +552,16 @@
       <to>Invalid Data</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Get File Name</from>
+      <to>Write to log</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Write to log</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Allowed File Format</name>
@@ -591,7 +596,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
+      <xloc>384</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -674,7 +679,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
+      <xloc>736</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -818,7 +823,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>864</xloc>
+      <xloc>944</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -890,7 +895,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>864</xloc>
+      <xloc>944</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -918,7 +923,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>512</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -977,7 +982,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
+      <xloc>1168</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1025,7 +1030,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
+      <xloc>1056</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1044,19 +1049,15 @@
     <fields>
       <field>
         <name>CREDIT_CODE</name>
-        <rename />
       </field>
       <field>
         <name>AMOUNT</name>
-        <rename />
       </field>
       <field>
         <name>CURRENCY</name>
-        <rename />
       </field>
       <field>
         <name>PAYMENT_DATE</name>
-        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1085,7 +1086,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
+      <xloc>848</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1118,7 +1119,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>256</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1155,7 +1156,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
+      <xloc>640</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1179,7 +1180,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
+      <xloc>640</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1213,7 +1214,41 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>512</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>FILENAME:</logmessage>
+    <fields>
+      <field>
+        <name>filename</name>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>160</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>

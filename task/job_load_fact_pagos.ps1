@@ -1,4 +1,4 @@
 # In argument section - The script will get the evetlog and save in the excel in specific location.
-$action  = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument '-NoProfile -WindowStyle Hidden -command "& {D:\pdi-ce-7.1.0.0-12\data-integration\Kitchen.bat /file:"zip:file:///D:/daas/job/job_load_fact_pagos.zip!job_load_fact_pagos.kjb" /level:basic /logfile:D:\log\job.log}"' 
+$action  = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument '-NoProfile -WindowStyle Hidden -command "& {D:\pdi-ce-7.1.0.0-12\data-integration\Kitchen.bat /file:"zip:file:///D:/daas/job/job_load_assignment.zip!job_load_assignment.kjb" /param:loadDate=202001 /param:filePath=D:\daas\data\CARTERA_COMPARTAMOS_202001.txt /level:basic /logfile:D:\log\job.log}"' 
 $trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At 8:00PM
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "job_load_fact_pagos" -Description "Kettle job execution"
