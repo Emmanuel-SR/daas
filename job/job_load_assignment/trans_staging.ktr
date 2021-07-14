@@ -498,23 +498,8 @@
   </connection>
   <order>
     <hop>
-      <from>Allowed File Format</from>
-      <to>Validate File Format</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Validate File Format</from>
       <to>Invalid File</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Validate File Format</from>
-      <to>Switch / Case</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
-      <to>Allowed File Format</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -557,9 +542,49 @@
       <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Regex Evaluation</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Regex Evaluation</from>
+      <to>Regex log</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Regex log</from>
+      <to>Validate File Format</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LOAD DATE</from>
+      <to>Switch / Case</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Validate File Format</from>
+      <to>Add "01"</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add "01"</from>
+      <to>yyyyMMdd</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>yyyyMMdd</from>
+      <to>LOAD DATE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LOAD DATE</from>
+      <to>Set loadDate</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
-    <name>Allowed File Format</name>
+    <name>Add "01"</name>
     <type>Constant</type>
     <description />
     <distribute>Y</distribute>
@@ -571,13 +596,13 @@
     </partitioning>
     <fields>
       <field>
-        <name>ALLOWED_FILE_FORMAT</name>
+        <name>DD</name>
         <type>String</type>
-        <format />
+        <format>##</format>
         <currency />
         <decimal />
         <group />
-        <nullif>txt</nullif>
+        <nullif>01</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -591,8 +616,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>192</yloc>
+      <xloc>560</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -740,8 +765,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>304</yloc>
+      <xloc>832</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -879,8 +904,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
-      <yloc>304</yloc>
+      <xloc>1040</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -951,8 +976,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
-      <yloc>208</yloc>
+      <xloc>1040</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -979,8 +1004,42 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>304</yloc>
+      <xloc>560</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LOAD DATE</name>
+    <type>WriteToLog</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>YYYYMMDD:</logmessage>
+    <fields>
+      <field>
+        <name>yyyyMMdd</name>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1062,8 +1121,139 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
-      <yloc>304</yloc>
+      <xloc>1136</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Regex Evaluation</name>
+    <type>RegexEval</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <script>CARTERA_COMPARTAMOS_((19|2[0-9])[0-9]{2})(0[1-9]|1[012])\.(txt)$</script>
+    <matcher>short_filename</matcher>
+    <resultfieldname>result</resultfieldname>
+    <usevar>N</usevar>
+    <allowcapturegroups>Y</allowcapturegroups>
+    <replacefields>N</replacefields>
+    <canoneq>N</canoneq>
+    <caseinsensitive>N</caseinsensitive>
+    <comment>N</comment>
+    <dotall>N</dotall>
+    <multiline>N</multiline>
+    <unicode>N</unicode>
+    <unix>N</unix>
+    <fields>
+      <field>
+        <name>YYYY</name>
+        <type>String</type>
+        <format />
+        <group />
+        <decimal />
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif />
+        <ifnull />
+        <trimtype>none</trimtype>
+        <currency />
+      </field>
+      <field>
+        <name>G2</name>
+        <type>String</type>
+        <format />
+        <group />
+        <decimal />
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif />
+        <ifnull />
+        <trimtype>none</trimtype>
+        <currency />
+      </field>
+      <field>
+        <name>MM</name>
+        <type>String</type>
+        <format />
+        <group />
+        <decimal />
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif />
+        <ifnull />
+        <trimtype>none</trimtype>
+        <currency />
+      </field>
+      <field>
+        <name>G4</name>
+        <type>String</type>
+        <format />
+        <group />
+        <decimal />
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif />
+        <ifnull />
+        <trimtype>none</trimtype>
+        <currency />
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Regex log</name>
+    <type>WriteToLog</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>REGEX:</logmessage>
+    <fields>
+      <field>
+        <name>result</name>
+      </field>
+      <field>
+        <name>YYYY</name>
+      </field>
+      <field>
+        <name>MM</name>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1119,8 +1309,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
-      <yloc>304</yloc>
+      <xloc>944</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1142,6 +1332,9 @@
       <field>
         <name>filename</name>
       </field>
+      <field>
+        <name>short_filename</name>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <cluster_schema />
@@ -1154,6 +1347,39 @@
     <GUI>
       <xloc>224</xloc>
       <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set loadDate</name>
+    <type>SetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>yyyyMMdd</field_name>
+        <variable_name>loadDate</variable_name>
+        <variable_type>PARENT_JOB</variable_type>
+        <default_value />
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>864</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1189,7 +1415,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>736</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1213,8 +1439,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>304</yloc>
+      <xloc>736</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1229,14 +1455,23 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <send_true_to>Switch / Case</send_true_to>
+    <send_true_to>Add "01"</send_true_to>
     <send_false_to>Invalid File</send_false_to>
     <compare>
       <condition>
         <negated>N</negated>
-        <leftvalue>extension</leftvalue>
-        <function>IN LIST</function>
-        <rightvalue>ALLOWED_FILE_FORMAT</rightvalue>
+        <leftvalue>result</leftvalue>
+        <function>=</function>
+        <rightvalue />
+        <value>
+          <name>constant</name>
+          <type>Boolean</type>
+          <text>Y</text>
+          <length>-1</length>
+          <precision>-1</precision>
+          <isnull>N</isnull>
+          <mask />
+        </value>
       </condition>
     </compare>
     <cluster_schema />
@@ -1247,7 +1482,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
+      <xloc>560</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1283,6 +1518,104 @@
     <GUI>
       <xloc>128</xloc>
       <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>yyyyMMdd</name>
+    <type>ConcatFields</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <separator />
+    <enclosure />
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding />
+    <endedLine />
+    <fileNameInField>N</fileNameInField>
+    <fileNameField />
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format />
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>YYYY</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>4</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>MM</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DD</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>yyyyMMdd</targetFieldName>
+      <targetFieldLength>6</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

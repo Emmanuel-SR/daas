@@ -10,7 +10,7 @@
     <directory>/</directory>
     <parameters>
       <parameter>
-        <name>LOAD_DATE</name>
+        <name>loadDate</name>
         <default_value />
         <description />
       </parameter>
@@ -504,12 +504,45 @@
     </hop>
     <hop>
       <from>Write to log</from>
-      <to>Call DB Procedure</to>
+      <to>Load Fact Payment</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Load Fact Payment</from>
+      <to>Abort</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Call DB Procedure</name>
+    <name>Abort</name>
+    <type>Abort</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <row_threshold>0</row_threshold>
+    <message />
+    <always_log_rows>Y</always_log_rows>
+    <abort_with_error>N</abort_with_error>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Load Fact Payment</name>
     <type>DBProc</type>
     <description />
     <distribute>Y</distribute>
@@ -560,7 +593,7 @@
     <fields>
       <field>
         <name>LOAD_DATE</name>
-        <variable>${LOAD_DATE}</variable>
+        <variable>${loadDate}</variable>
         <type>Date</type>
         <format>yyyyMMdd</format>
         <currency />
@@ -619,6 +652,18 @@
     </GUI>
   </step>
   <step_error_handling>
+    <error>
+      <source_step>Load Fact Payment</source_step>
+      <target_step>Abort</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename />
+      <descriptions_valuename />
+      <fields_valuename />
+      <codes_valuename />
+      <max_errors />
+      <max_pct_errors />
+      <min_pct_rows />
+    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>

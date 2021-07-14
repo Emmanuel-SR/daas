@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>trans_load_fact</name>
+    <name>trans_build_olap_cube</name>
     <description />
     <extended_description />
     <trans_version />
@@ -10,7 +10,7 @@
     <directory>/</directory>
     <parameters>
       <parameter>
-        <name>LOAD_DATE</name>
+        <name>loadDate</name>
         <default_value />
         <description />
       </parameter>
@@ -504,12 +504,127 @@
     </hop>
     <hop>
       <from>Write to log</from>
-      <to>Call DB Procedure</to>
+      <to>sp_build_contactability</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Write to log</from>
+      <to>sp_build_coverage</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sp_build_coverage</from>
+      <to>Abort</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sp_build_contactability</from>
+      <to>Abort</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Call DB Procedure</name>
+    <name>Abort</name>
+    <type>Abort</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <row_threshold>0</row_threshold>
+    <message />
+    <always_log_rows>Y</always_log_rows>
+    <abort_with_error>N</abort_with_error>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get LOAD_DATE</name>
+    <type>GetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>LOAD_DATE</name>
+        <variable>${loadDate}</variable>
+        <type>Date</type>
+        <format>yyyyMMdd</format>
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>FECHA CARGA:</logmessage>
+    <fields>
+      <field>
+        <name>LOAD_DATE</name>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sp_build_contactability</name>
     <type>DBProc</type>
     <description />
     <distribute>Y</distribute>
@@ -547,8 +662,8 @@
     </GUI>
   </step>
   <step>
-    <name>Get LOAD_DATE</name>
-    <type>GetVariable</type>
+    <name>sp_build_coverage</name>
+    <type>DBProc</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -557,20 +672,20 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <fields>
-      <field>
+    <connection>CIP_DM</connection>
+    <procedure>CIP_DM.STAGE.SP_BUILD_COVERAGE;1</procedure>
+    <lookup>
+      <arg>
         <name>LOAD_DATE</name>
-        <variable>${LOAD_DATE}</variable>
+        <direction>IN</direction>
         <type>Date</type>
-        <format>yyyyMMdd</format>
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
+      </arg>
+    </lookup>
+    <result>
+      <name />
+      <type>Number</type>
+    </result>
+    <auto_commit>N</auto_commit>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -579,46 +694,36 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>FECHA CARGA:</logmessage>
-    <fields>
-      <field>
-        <name>LOAD_DATE</name>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>208</xloc>
-      <yloc>80</yloc>
+      <xloc>352</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
+    <error>
+      <source_step>sp_build_contactability</source_step>
+      <target_step>Abort</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename />
+      <descriptions_valuename />
+      <fields_valuename />
+      <codes_valuename />
+      <max_errors />
+      <max_pct_errors />
+      <min_pct_rows />
+    </error>
+    <error>
+      <source_step>sp_build_coverage</source_step>
+      <target_step>Abort</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename />
+      <descriptions_valuename />
+      <fields_valuename />
+      <codes_valuename />
+      <max_errors />
+      <max_pct_errors />
+      <min_pct_rows />
+    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>

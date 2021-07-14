@@ -27,11 +27,6 @@
       <description />
     </parameter>
     <parameter>
-      <name>loadDate</name>
-      <default_value>20200701</default_value>
-      <description />
-    </parameter>
-    <parameter>
       <name>portSMTP</name>
       <default_value>465</default_value>
       <description />
@@ -403,7 +398,7 @@
       <parameters>
         <pass_all_parameters>N</pass_all_parameters>
         <parameter>
-          <name>LOAD_DATE</name>
+          <name>loadDate</name>
           <stream_name />
           <value>${loadDate}</value>
         </parameter>
@@ -734,27 +729,6 @@
     </hop>
   </hops>
   <notepads>
-    <notepad>
-      <note>Job to load assigment data into fact table.</note>
-      <xloc>32</xloc>
-      <yloc>32</yloc>
-      <width>230</width>
-      <heigth>26</heigth>
-      <fontname>Segoe UI</fontname>
-      <fontsize>9</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
   </notepads>
   <attributes>
     <group>
